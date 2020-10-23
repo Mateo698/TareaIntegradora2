@@ -17,7 +17,7 @@ public class Playlist{
 	
 	public void addSong(Song newSong){
 		playlistSongs.add(newSong);
-		playlistLength.addLenth(newSong.getHours, newSong.getMinutes, newSong.getSeconds)
+		playlistLength.addLength(newSong.getHours, newSong.getMinutes, newSong.getSeconds)
 	}
 	
 	public String removeSong(int song){
@@ -25,6 +25,7 @@ public class Playlist{
 		if(song<=playlistSongs.size()){
 			playlistSongs.remove(song);
 			return "La cancion fue eliminada exitosamente";
+			
 		}
 		else{
 			return "Valor invalido";
@@ -53,3 +54,5 @@ public class Playlist{
 			return true;
 		}
 	}
+	
+}

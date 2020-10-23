@@ -21,3 +21,4 @@ public class Length{
 		this.minutes -= minutes;
 		this.seconds -= seconds;
 	}
+}
