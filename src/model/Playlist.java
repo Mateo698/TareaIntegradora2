@@ -17,7 +17,7 @@ public class Playlist{
 	
 	public void addSong(Song newSong){
 		playlistSongs.add(newSong);
-		playlistLength.addLength(newSong.getHours, newSong.getMinutes, newSong.getSeconds)
+		playlistLength.addLength(newSong.getHours, newSong.getMinutes, newSong.getSeconds);
 	}
 	
 	public String removeSong(int song){
@@ -34,7 +34,7 @@ public class Playlist{
 	}
 	
 	public String showSongs(){
-		msg = "Las canciones de la playlist son:\n";
+		String msg = "Las canciones de la playlist son:\n";
 		if(playlistSongs.get(0) == null){
 			return "No hay canciones en esta playlist";
 		}

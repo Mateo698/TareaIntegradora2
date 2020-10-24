@@ -5,10 +5,10 @@ public class Song{
 	public Genre songGenre;
 	private Length songLength;
 	
-	public Song(String title, String artist, int songGenre, Length songLength){
+	public Song(String title, String artist, int pSongGenre, Length songLength){
 		this.title = title;
 		this.artist = artist;
-		switch(songGenre){
+		switch(pSongGenre){
 			case 1:
 				songGenre = Genre.rock;
 			break;
@@ -37,4 +37,23 @@ public class Song{
 		}
 	}
 	
+	public String getName(){
+		return title;
+	}
+	
+	public String getArtist(){
+		return artist;
+	}
+	
+	public Genre getGenre(){
+		return songSenre;
+	}
+	
+	public int getMinutes(){
+		return songLength.getMinutes();
+	}
+	
+	public int getSeconds(){
+		return songLength.getSeconds();
+	}
 }

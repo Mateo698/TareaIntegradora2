@@ -21,4 +21,12 @@ public class Length{
 		this.minutes -= minutes;
 		this.seconds -= seconds;
 	}
+	
+	public int getMinutes(){
+		return minutes;
+	}
+	
+	public int getSeconds(){
+		return seconds;
+	}
 }
