@@ -45,8 +45,38 @@ public class Song{
 		return artist;
 	}
 	
-	public Genre getGenre(){
-		return songSenre;
+	public String getGenre(){
+		String genre = " ";
+		switch(pool[i].getGenre){
+			case rock:
+				songGenre = "Rock";
+			break;
+			
+			case hip_hop:
+				songGenre = "Hip Hop";
+			break;
+					
+			case classic:
+				songGenre = "Classic";
+			break;
+			
+			case raggae:
+				songGenre = "Reggae";
+			break;
+			
+			case salsa:
+				songGenre = "Salsa";
+			break;
+			
+			case metal:
+				songGenre = "Metal";
+			break;
+			
+			default:
+				songGenre = "Unkown";
+		}
+		
+		return genre;
 	}
 	
 	public int getMinutes(){

@@ -11,7 +11,7 @@ public class App{
 		users = new User[10];
 	}
 	
-	public void addPoolSong(Song newSong){
+	public String addPoolSong(Song newSong){
 		boolean added = false;
 		for(int i=0; i<pool.length && !added; i++){
 			if(pool[i] == null){
@@ -19,47 +19,52 @@ public class App{
 				added = true;
 			}
 		}
-	}
-	
-	public void newPlaylist(String name, int type){
-		boolean leave = false;
-		switch(type){
-			case 1:
-				privatePlaylist newPL = new privatePlaylist(name, );
-				for(int i=0; i==i && !false; i++){
-					if(playlist[i] == null){
-						playlist[i] = newPL;
-						leave = true;
-					}
-				}
-			break;
-			
-			case 2:
-				limitedPlaylist newPL = new privatePlaylist(name, );
-				for(int i=0; i==i && !false; i++){
-					if(playlist[i] == null){
-						playlist[i] = newPL;
-						leave = true;
-					}
-				}
-			break;
-			
-			case 3:
-				publicPlaylist newPL = new publicPlaylist(name, );
-				for(int i=0; i==i && !false; i++){
-					if(playlist[i] == null){
-						playlist[i] = newPL;
-						leave = true;
-					}
-				}
-			break; 
-			
-			default:
-			
+		if(added){
+			return "La cancion fue agregada correctamente";
+		}
+		else{
+			return "No se pudo agregar la cancion";
 		}
 	}
 	
+	public void newPrivatePlaylist(String name, User localUser){
+		boolean leave = false;
+		privatePlaylist newPL = new privatePlaylist(name,localUser);
+		for(int i=0; i==i && !false; i++){
+			if(playlist[i] == null){
+				playlist[i] = newPL;
+				leave = true;
+			}
+		}
+		
+	}
+	
+	public void newLimitedPlaylist(){
+		boolean leave = false;
+		limitedPlaylist newPL = new limitedPlaylist(name, );
+		for(int i=0; i==i && !false; i++){
+			if(playlist[i] == null){
+				playlist[i] = newPL;
+				leave = true;
+			}
+		}
+	}
+	
+	
+	public void newPublicPlaylist(){
+		boolean leave = false;
+		publicPlaylist newPL = new publicPlaylist(name, );
+		for(int i=0; i==i && !false; i++){
+			if(playlist[i] == null){
+				playlist[i] = newPL;
+				leave = true;
+			}
+		}
+		
+	}
+	
 	public String seePool(){
+		String songGenre = " ";
 		String msg = "Estas son las canciones compartidas hasta el momento:\n";
 		for(int i=0; i<pool.length; i++){
 			if(pool[i] != null){
@@ -67,12 +72,16 @@ public class App{
 				"**  Title: "+pool[i].getName()+"\n"+
 				"**  Artist: "+pool[i].getArtist()+"\n"+
 				"**  Duration: "+pool[i].getMinutes()+":"+pool[i].getSeconds()+"\n"+
-				"**  Genre: "+ 
-				***********************************
-
-		
-		
-		
+				"**  Genre: "+ pool[i].getGenre()+"\n"+
+				"***********************************"+"\n";
+			}
+		}
+		if(msg.equals("Estas son las canciones compartidas hasta el momento:\n")){
+			return "Todavia no hay canciones compartidas";
+		}
+		else{
+			return msg;
+		}
 	}
 	
 	public int getUsersLength(){

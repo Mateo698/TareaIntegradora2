@@ -105,32 +105,17 @@ public class Menu{
 	}
 	
 	public boolean userMenu(String nickname){
-		Category userCategory;
-		String userCategoryS;
+		User localUser;
+		String userCategory;
 		int userAge;
 		int userIndex;
 		boolean found = false;
-		for(int i=0; i<App.getUsers().length && !found; i++){
-			if(App.getUsers()[i].getName().equals(nickname)){
-				userAge = App.getUsers()[i].getAge();
-				userCategory = App.getUsers()[i].getCategory();
+		for(int i=0; i<App.getUsersLength() && !found; i++){
+			if(App.getUser(i).getName().equals(nickname)){
+				localUser = App.getUser(i);
+				userAge = App.getUser(i).getAge();
+				userCategory = App.getUser(i).getCategory();
 				userIndex = i;
-				switch(userCategory){
-					case newbie:
-						userCategoryS = "NEWBIE";
-					break;
-					
-					case little_contributor:
-						userCategoryS = "LITTLE CONTRIBUTOR";
-					break;
-					
-					case star_contributor:
-						userCategoryS = "STAR CONTRIBUTOR";
-					break;
-					
-					default:
-						userCategoryS = "NEWBIE";
-				}
 			}
 		}
 		boolean leave = false;
@@ -158,15 +143,15 @@ public class Menu{
 					
 					case ADD_SONG:
 						Song newSong = readSong();
-						App.addPoolSong(newSong);
+						System.out.println(App.addPoolSong(newSong));
 					break;
 					
 					case SEE_POOl:
-					
+						System.out.println(App.seePool());
 					break;
 					
 					case NEW_PLAYLIST:
-					
+						System.out.println(readPlaylist(localUser));
 					break;
 					
 					case SEE_PLAYLIST:
@@ -208,6 +193,36 @@ public class Menu{
 		Length songLength = new Length(0, minutes, seconds);
 		Song newSong = new Song(title, artist, genre, songLength);
 		return newSong;
+	}
+	
+	public String readPlaylist(User localUser){
+		System.out.println("Ingrese el nombre de la playlist");
+		String name = in.nextLine();
+		System.out.println("Ingrese 1 si desea que sea privada\n2 si desea que sea restringida\n3 si desea que sea publica");
+		int type = in.nextInt();
+		in.nextLine();
+		switch(type){
+			case 1:
+				App.newPrivatePlaylist(name, localUser);
+			break;
+			
+			case 2
+				readLimitedPlaylist(name, localUser);
+			break;
+			
+			case 3
+				App.newPublicPlaylist();
+			break;
+			
+			default:
+			
+		}
+	}
+	
+	public readLimitedPlaylist(String name, User localUser){
+		System.out.println("Ingrese 
+		
+		
 	}
 	
 	
