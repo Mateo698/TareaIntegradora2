@@ -8,6 +8,7 @@ public class Song{
 	public Song(String title, String artist, int pSongGenre, Length songLength){
 		this.title = title;
 		this.artist = artist;
+		this.songLength = songLength;
 		switch(pSongGenre){
 			case 1:
 				songGenre = Genre.rock;
@@ -47,36 +48,40 @@ public class Song{
 	
 	public String getGenre(){
 		String genre = " ";
-		switch(pool[i].getGenre){
+		switch(songGenre){
 			case rock:
-				songGenre = "Rock";
+				genre = "Rock";
 			break;
 			
 			case hip_hop:
-				songGenre = "Hip Hop";
+				genre = "Hip Hop";
 			break;
 					
 			case classic:
-				songGenre = "Classic";
+				genre = "Classic";
 			break;
 			
-			case raggae:
-				songGenre = "Reggae";
+			case reggae:
+				genre = "Reggae";
 			break;
 			
 			case salsa:
-				songGenre = "Salsa";
+				genre = "Salsa";
 			break;
 			
 			case metal:
-				songGenre = "Metal";
+				genre = "Metal";
 			break;
 			
 			default:
-				songGenre = "Unkown";
+				genre = "Unkown";
 		}
 		
 		return genre;
+	}
+	
+	public Genre getOriginalGenre(){
+		return songGenre;
 	}
 	
 	public int getMinutes(){
@@ -85,5 +90,9 @@ public class Song{
 	
 	public int getSeconds(){
 		return songLength.getSeconds();
+	}
+	
+	public int getHours(){
+		return songLength.getHours();
 	}
 }

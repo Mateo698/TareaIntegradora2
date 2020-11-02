@@ -4,6 +4,7 @@ public class User{
 	private String nickname;
 	private String password;
 	private int age;
+	private int sharedSongs;
 	private Category userCategory;
 	
 	public User(String nickname, String password, int age){
@@ -11,7 +12,7 @@ public class User{
 		this.password = password;
 		this.age = age;
 		userCategory = Category.newbie;
-
+		sharedSongs = 0;
 	}
 	
 	public String getName(){
@@ -32,6 +33,10 @@ public class User{
 			case little_contributor:
 				userCategoryS = "LITTLE CONTRIBUTOR";
 			break;
+			
+			case mild_contributor:
+				userCategoryS = "MILD CONTRIBUTOR";
+			break;
 		
 			case star_contributor:
 				userCategoryS = "STAR CONTRIBUTOR";
@@ -46,5 +51,27 @@ public class User{
 		return age;
 	}
 	
+	public void setSharedSongs(){
+		sharedSongs ++;
+		if(sharedSongs == 3){
+			userCategory = Category.little_contributor;
+		}
+		else if(sharedSongs == 10){
+			userCategory = Category.mild_contributor;
+		}
+		else if(sharedSongs == 30){
+			userCategory = Category.star_contributor;
+		}
+	}
 	
+	public String seeUserData(){
+		String msg;
+		msg = "*************  User **************\n"+
+		"**  UserName: "+nickname+"\n"+
+		"**  Age: "+age+"\n"+
+		"**  Category: "+getCategory()+"\n"+
+		"***********************************\n";
+		return msg;
+		
+	}
 }
