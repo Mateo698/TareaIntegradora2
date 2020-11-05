@@ -5,11 +5,11 @@ public class Menu{
 	
 	
 	
-	//Initial menu
+	//These are constant numbers that the user will choose for the Initial menu
 	private final int LOG_IN = 1;
 	private final int SIGN_IN = 2;
 	
-	//User menu
+	//These are the constant number/options that the user can choose in the User menu
 	private final int SEE_DATA = 1;
 	private final int ADD_SONG = 2;
 	private final int SEE_POOL = 3;
@@ -18,9 +18,10 @@ public class Menu{
 	private final int SEE_PLAYLIST = 6;
 	private final int SEE_USERS = 7;
 	
-	
+	//In all the menus there will be this option to allow the user go back or leave the app
 	private final int EXIT = 0;
 	
+	//This is the App
 	private App app;
 	
 	private Scanner in = new Scanner(System.in);
@@ -330,7 +331,7 @@ public class Menu{
 	}
 	
 	/**
-	*Redas the information and add new playlist to the app<br>
+	*Reads the information and add new playlist to the app<br>
 	*<b>pre: </b> There must be an app and a user created <br>
 	*<b>post: </b> Call the selected method tfor the selected options <br>
 	*@ param localUser its all the information of the user. localUser != null

@@ -1,8 +1,12 @@
 package model;
 public class Song{
+	//The title of the song
 	private String title;
+	//The artist that made or published the song
 	private String artist;
+	//The song genre 
 	public Genre songGenre;
+	//The song's length that includes hours, minutes and seconds
 	private Length songLength;
 	
 	public Song(String title, String artist, int pSongGenre, Length songLength){

@@ -2,8 +2,11 @@ package model;
 
 public class App{
 	
+	//This is the array taht will save every user that enters in the app
 	private User[] users;
+	//This is the array that will save all the playlist created in the app
 	private Playlist[] playlist;
+	//This array saves the shared songs by the users
 	private Song[] pool;
 	
 	public App(){
