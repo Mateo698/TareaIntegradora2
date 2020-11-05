@@ -15,6 +15,12 @@ public abstract class Playlist{
 		playlistLength = new Length(0,0,0);
 	}
 	
+	/**
+	*Add a song to the arraylist of songs/ Add a new song to the playlist<br>
+	*<b>pre: </b> The song must be already created before calling the method <br>
+	*<b>post: </b> There is a new song in the arraylist of songs <br>
+	*@param newSong object of type song. newSong != null
+	*/
 	public void addSong(Song newSong){
 		playlistSongs.add(newSong);
 		playlistLength.addLength(newSong.getHours(), newSong.getMinutes(), newSong.getSeconds());
@@ -37,7 +43,12 @@ public abstract class Playlist{
 		}
 	}
 	
-	
+	/**
+	*Generates a String with the info of the playlist, including name, length, genres and users that have acces<br>
+	*<b>pre: </b> The playlist must already be created <br>
+	*<b>post: </b> The whole information has been given <br>
+	*@return The information of the playlist
+	*/
 	public String showInfo(){
 		String info;
 		info = "**************  Playlist **************" + "\n" +
@@ -47,10 +58,24 @@ public abstract class Playlist{
 		return info;
 	}
 	
+	
 	public abstract boolean haveAcces(String nickname);
 	
+	/**
+	*This method is Overrided in publicPlaylist to be able to set grade<br>
+	*<b>pre: </b>  <br>
+	*<b>post: </b>  <br>
+	*@param .Variable  >= 0
+	*@return 
+	*/
 	public void addGrade(double g){}
 	
+	/**
+	*Generates a String with all the songs in the arraylist of songs.<br>
+	*<b>pre: </b> A sub class of playlist must already be created. <br>
+	*<b>post: </b> Gives all the information of the songs in the arraylist. <br>
+	*@return A string with all the song's info.
+	*/
 	public String showSongs(){
 		String msg = "Las canciones de la playlist son:\n";
 		if(playlistSongs.isEmpty()){
@@ -64,24 +89,34 @@ public abstract class Playlist{
 		}
 	}
 	
-	public boolean thereSongs(){
-		if(playlistSongs.isEmpty()){
-			return false;
-		}
-		else{
-			return true;
-		}
-	}
-	
+
+	/**
+	*Gives the name of the playlist.<br>
+	*<b>pre: </b> A sub class of Playlist must already be created. <br>
+	*<b>post: </b> Gives the name of the playlist <br>
+	*@return The name of the playlist
+	*/
 	public String getName(){
 		return name;
 	}
 	
+	/**
+	*Generates a String with the information of th length of the playlist.<br>
+	*<b>pre: </b> The playlist must already have an object of type Length <br>
+	*<b>post: </b> Gives the length of the playlist. <br>
+	*@return The length of the playlist.
+	*/
 	public String getLength(){
 		String length = playlistLength.getHours() +":"+ playlistLength.getMinutes() +":"+ playlistLength.getSeconds();
 		return length;
 	}
 	
+	/**
+	*Generates a String with the genres of the playlist. <br>
+	*<b>pre: </b> A sub class object of Playlist must already be created <br>
+	*<b>post: </b> Gives the genres in the  <br>
+	*@return The genres of the songs in the playlist AKA the playlist genres.
+	*/
 	public String getGenres(){
 		int numGenres = 0;
 		for(int i=0; i<playlistGenres.length; i++){
@@ -127,7 +162,12 @@ public abstract class Playlist{
 				genres+= ", ";
 			}
 		}
-		return genres;
+		if(genres.equals(" ")){
+			return "Unknown";
+		}
+		else{
+			return genres;
+		}
 	}
 	
 }

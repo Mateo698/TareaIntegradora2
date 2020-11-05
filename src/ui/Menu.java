@@ -29,6 +29,12 @@ public class Menu{
 		app = new App();
 	}
 	
+	/**
+	*Displays the initial menu where the user can login, signin and leave the app <br>
+	*<b>pre: </b> There must be an App created <br>
+	*<b>post: </b> Shows the initial menu <br>
+	*@return A boolean that says if it repeats the menu or leave
+	*/
 	public boolean initialMenu(){
 		boolean leaveApp = false;
 		String user;
@@ -81,6 +87,12 @@ public class Menu{
 		return leaveApp;
 	}
 	
+	/**
+	*Its the menu where the user can get in a existing account if it have one<br>
+	*<b>pre: </b> The user must have selected the option LOG_IN and the App must be created <br>
+	*<b>post: </b> Displays the login menu <br>
+	*@return the user's nickname to work with it along the task that it selects
+	*/
 	public String logInMenu(){
 		System.out.println("Ingrese el nombre de usuario");
 		String nickname = in.nextLine();
@@ -110,6 +122,13 @@ public class Menu{
 		}
 	}
 	
+	/**
+	*Displays all the options that a user can do, depending on its selection sends it to differnt methods or just leaves<br>
+	*<b>pre: </b> There must at least one user created in the app's users array <br>
+	*<b>post: </b> Display the user menu <br>
+	*@param nickname its the logged in user's nickname. nickname != null
+	*@return If the users wants to leave the menu or not
+	*/
 	public boolean userMenu(String nickname){
 		boolean leaveUserMenu = false;
 		User localUser = null;
@@ -188,67 +207,88 @@ public class Menu{
 		return leaveUserMenu;
 	}
 	
+	/**
+	*Displays th options to do with a playlist and read it depending on the user's selection<br>
+	*<b>pre: </b> There must be a user logged in and created <br>
+	*<b>post: </b> Displays the options for a playlist <br>
+	*@param nickname Its the user's nickname. nickname != null
+	*/
 	public void addSongToPlaylist(String nickname){
 		double grade;
 		int selectedPlaylist;
 		int operation;
 		int selectedSong;
 		showPlaylist();
-		System.out.println("Seleccione el numero de la playlist a la cual quiere acceder");
-		selectedPlaylist = in.nextInt();
-		if(app.haveAccesToPlaylist(selectedPlaylist,nickname)){
-			if(app.isPublic(selectedPlaylist)){
-				System.out.println("Ingrese 1 si quiere agregar una cancion a la playlist, 2 si quiere ver las canciones de la playlist, 3 para calificar la playlist");
-				operation = in.nextInt();
-				switch(operation){
-					case 1:
+		if(app.getPlaylistAmount() == 0){
+			System.out.println("Por favor intentelo mas tarde o cree una playlist");
+		}
+		else{
+			System.out.println("Seleccione el numero de la playlist a la cual quiere acceder");
+			selectedPlaylist = in.nextInt();
+			if(app.haveAccesToPlaylist(selectedPlaylist,nickname)){
+				if(app.isPublic(selectedPlaylist)){
+					System.out.println("Ingrese 1 si quiere agregar una cancion a la playlist, 2 si quiere ver las canciones de la playlist, 3 para calificar la playlist");
+					operation = in.nextInt();
+					switch(operation){
+						case 1:
+							System.out.println(app.seePool());
+							System.out.println("Digite el numero de la cancion que desea agregar a la playlist");
+							selectedSong = in.nextInt();
+							in.nextLine();
+							app.addPlaylistSong(selectedPlaylist,selectedSong);
+						break;
+						
+						case 2:
+							System.out.println(app.seePlaylistSongs(selectedPlaylist));
+						break;
+						
+						case 3:
+							System.out.println("Ingrese su calificacion de 0 a 5");
+							grade = in.nextDouble();
+							in.nextLine();
+							app.setGrade(grade, selectedPlaylist);
+						break;
+						
+						default:
+							System.out.println("Opcion invalida");
+					} 
+				}
+				else{
+					System.out.println("Ingrese 1 si quiere agregar una cancion a la playlist, 2 si quiere ver las canciones de la playlist");
+					operation = in.nextInt();
+					if(operation == 1){
 						System.out.println(app.seePool());
 						System.out.println("Digite el numero de la cancion que desea agregar a la playlist");
 						selectedSong = in.nextInt();
 						in.nextLine();
 						app.addPlaylistSong(selectedPlaylist,selectedSong);
-					break;
-					
-					case 2:
+					}
+					else{
 						System.out.println(app.seePlaylistSongs(selectedPlaylist));
-					break;
-					
-					case 3:
-						System.out.println("Ingrese su calificacion de 0 a 5");
-						grade = in.nextDouble();
-						in.nextLine();
-						app.setGrade(grade, selectedPlaylist);
-					break;
-					
-					default:
-						System.out.println("Opcion invalida");
-				} 
+					}	
+				}
 			}
 			else{
-				System.out.println("Ingrese 1 si quiere agregar una cancion a la playlist, 2 si quiere ver las canciones de la playlist");
-				operation = in.nextInt();
-				if(operation == 1){
-					System.out.println(app.seePool());
-					System.out.println("Digite el numero de la cancion que desea agregar a la playlist");
-					selectedSong = in.nextInt();
-					in.nextLine();
-					app.addPlaylistSong(selectedPlaylist,selectedSong);
-				}
-				else{
-					System.out.println(app.seePlaylistSongs(selectedPlaylist));
-				}	
+				System.out.println("Usted no tiende acceso a esta playlist");
 			}
 		}
-		else{
-			System.out.println("Usted no tiende acceso a esta playlist");
-		}
-		
 	}
 	
+	/**
+	*Prints the playlist in the app<br>
+	*<b>pre: </b> There must be an app created <br>
+	*<b>post: </b> Shows the playlist in the app <br>
+	*/
 	public void showPlaylist(){
 		System.out.println(app.seePlaylist());
 	}
 	
+	/**
+	*Displays the sign In menu to let a new user create a new account<br>
+	*<b>pre: </b> There must be an app created <br>
+	*<b>post: </b> Created a new user and log in to display user's menu <br>
+	*@return nickname its the user's nickname to wotk along the app with it. nickname != null
+	*/
 	public String signInMenu(){
 		String nickname;
 		String password;
@@ -265,6 +305,12 @@ public class Menu{
 		return nickname;
 	}
 	
+	/**
+	*Read a song and its information when the user selects this option<br>
+	*<b>pre: </b> There must be a user created and an app <br>
+	*<b>post: </b> Generates a new song <br>
+	*@return The new song created by the user
+	*/
 	public Song readSong(){
 		System.out.println("Ingrese el nombre de la cancion");
 		String title = in.nextLine();
@@ -283,6 +329,12 @@ public class Menu{
 		return newSong;
 	}
 	
+	/**
+	*Redas the information and add new playlist to the app<br>
+	*<b>pre: </b> There must be an app and a user created <br>
+	*<b>post: </b> Call the selected method tfor the selected options <br>
+	*@ param localUser its all the information of the user. localUser != null
+	*/
 	public void readPlaylist(User localUser){
 		String[] accesUsers; 
 		System.out.println("Ingrese el nombre de la playlist");
@@ -309,6 +361,13 @@ public class Menu{
 		}
 	}
 	
+	/**
+	*Read the users that will have acces to this playlist<br>
+	*<b>pre: </b> There must be an app and an user created  <br>
+	*<b>post: </b> Creates an array with the users that will have acces <br>
+	*@param localUser its the information of the user. localUser != null
+	*@return the list of users that will have acces
+	*/
 	public String[] readLimitedPlaylist(User localUser){
 		String selectedUser;
 		boolean leave = false;
@@ -339,9 +398,11 @@ public class Menu{
 		
 	}
 	
-	
-	
-	
+	/**
+	*Starts the program calling in a loop the initial menu till the user decides to leave<br>
+	*<b>pre: </b> There must be an app created <br>
+	*<b>post: </b> Calls the initial menu <br>
+	*/
 	public void startProgram(){
 		boolean leaveInitialMenu = false;
 		for(int i=0; i==i && !leaveInitialMenu; i++){
@@ -351,7 +412,12 @@ public class Menu{
 	}
 	
 	
-	
+	/**
+	*Reads an int/option selected by an user<br>
+	*<b>pre: </b> There must be a variable to save the option <br>
+	*<b>post: </b> Read the user's  option <br>
+	*@return The option selected by the user
+	*/
 	public int readOption(){
 		int selection;
 		selection = in.nextInt();
@@ -359,6 +425,11 @@ public class Menu{
 		return selection;
 	}
 	
+	/**
+	*Prints the logo of the App<br>
+	*<b>pre: </b> None <br>
+	*<b>post: </b> Prints the logo <br>
+	*/
 	public void printLogo(){
 		System.out.println("(((((((((((((((((((((((((((((((((((((((((((((((((\n"+
 "((((((((((((((((/((((((((((((((((((((((((((((((((\n"+
